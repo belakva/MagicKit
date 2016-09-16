@@ -95,10 +95,10 @@
     } else if ([dataOrFilePath isKindOfClass:[NSString class]]) {
         rawOutput = magic_file(cookie, [dataOrFilePath fileSystemRepresentation]);
     } else {
-        [NSException raise:@"MagicKit" format:@"Invalid object (expected data or path string): %@", dataOrFilePath];
+        NSLog(@"MagicKit ERROR: Invalid object (expected data or path string)");
     }
 
-    return rawOutput ? [NSString stringWithUTF8String:rawOutput] : nil;
+    return (rawOutput != NULL && strlen(rawOutput) > 1) ? [NSString stringWithUTF8String:rawOutput] : nil;
 }
 
 + (NSArray *)typeHierarchyForType:(NSString *)uniformType {
